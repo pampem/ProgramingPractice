@@ -7,7 +7,6 @@ using namespace std;
 
 // AとBに共通して含まれる要素からなる集合を返す
 bitset<50> intersection(bitset<50> A, bitset<50> B) {
-
   return A&B;
 }
 // AとBのうち少なくとも一方に含まれる要素からなる集合を返す
@@ -20,15 +19,28 @@ bitset<50> symmetric_diff(bitset<50> A, bitset<50> B) {
 }
 // Aから値xを除く
 bitset<50> subtract(bitset<50> A, int x) {
-  A.set(x,0);
+  A.reset(x);
   return A;
 }
 // Aに含まれる要素に1を加える(ただし、要素49が含まれる場合は0になるものとする)
 bitset<50> increment(bitset<50> A) {
-  
+  if(A.test(49)){
+    A = A << 1;
+    A.set(0);
+  }else{
+    A = A << 1;
+  }
+  return A;
 }
 // Aに含まれる要素から1を引く(ただし、要素0が含まれる場合は49になるものとする)
 bitset<50> decrement(bitset<50> A) {
+  if(A.test(0)){
+    A >>= 1;
+    A.set(49);
+  }else{
+    A >>= 1;
+  }
+  return A;
 }
 
 // Sに値xを加える
@@ -86,6 +98,7 @@ int main() {
     cin >> x;
     print_set(subtract(A, x));
   } else if (com == "increment") {
+    //cout << A << endl;
     print_set(increment(A));
   } else if (com == "decrement") {
     print_set(decrement(A));
