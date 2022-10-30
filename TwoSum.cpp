@@ -46,7 +46,7 @@ std::vector<int> twoSum(vector<int>& nums, int target){
     mp[nums.at(i)] = i;
   }
 
-  return nullptr;
+  return {};
 }
 
  int main(){
