@@ -1,4 +1,4 @@
-//AC Beginners Selection 3rd problem.
+//AC Beginners Selection 2nd problem.
 //Today >> 221031
 //どうしてもBitsetを使いたかった。
 

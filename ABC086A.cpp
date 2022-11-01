@@ -1,4 +1,4 @@
-//AC Beginners Selectonの2問目。
+//AC Beginners Selectonの1問目。
 //today is 221031
 
 #include <bits/stdc++.h>
