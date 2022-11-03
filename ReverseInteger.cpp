@@ -9,24 +9,16 @@ using namespace std;
 class Solution {
 public:
     int reverse(int x) {
-      string s = to_string(x);
-      //sをReverseする。
+      int rev = 0; //これにxを逆にしたものが入る
+      while(x != 0){
+        int pop = x %10;
+        x /= 10;
+        if(rev > INT_MAX/10 || rev == INT_MAX / 10 && pop > 7) return 0;
+        if(rev < INT_MIN/10 || rev == INT_MIN / 10 && pop < -8) return 0;
+        rev = rev * 10 + pop;
 
-      int i=0,j=s.size()-1;
-
-      while(i<j){
-        char tmp = s.at(i);
-        s.at(i)=s.at(j);
-        s.at(j)=tmp;
-        i++;
-        j--;
       }
+      return rev;
 
-      x = stoi(s);
-      if(s.at(s.size()-1)=='-'){
-        x*=-1;
-      }
-
-      return x;
     }
 };
