@@ -5,19 +5,20 @@
 
 #include <bits/stdc++.h>
 using namespace std;
-#define rep(i, n) for (int i = 0; i < (int)(n); i++)
 
-bool abovetheborder(int64_t border, int64_t N, int64_t L, int64_t K, vector<int64_t> A){
-  int64_t currentlen = 0;
+int64_t N;
+int64_t L;
+int64_t K;
+std::vector<int64_t> A;
+
+bool abovetheborder(int64_t border){
   int64_t count = 0;
   int64_t prev = 0;
 
-  for(int64_t i=0; i < N; i++){
-    currentlen = A.at(i) - prev;
-    if(currentlen >= border && L-A.at(i) >= border){
-      prev = currentlen;
+  for(int i=0; i < N; i++){
+    if(A.at(i) - prev >= border && L-A.at(i) >= border){
+      prev = A.at(i);
       count++;
-      currentlen = 0;
     }
   }
   if(count >= K) return true;
@@ -26,16 +27,17 @@ bool abovetheborder(int64_t border, int64_t N, int64_t L, int64_t K, vector<int6
 
 
 int main(){
-  int64_t N, L, K;
-  vector<int64_t> A(N);
   //N;合計切れ目数
   //L;ようかんの長さ
   //K;切る数
   //A;切れ目位置
 
-  cin >> N >> L >> K;
-  for(int64_t i=0; i<N; i++){
-    cin >> A.at(i);
+  int tmp;
+  cin >> N >> L;
+  cin >> K;
+  for(int i=0; i<N; i++){
+    cin >> tmp;
+    A.push_back(tmp);
   }
   //二分探索を行う。
   //まずはNのL/2を境界として、それ以上かどうかを判定する。
@@ -54,7 +56,7 @@ int main(){
   //viewlength = 見る範囲を表す変数
   //viewlength = L (at first)
 
-  int64_t border = L/2;//更新
+  int64_t border;
   // int flag=1; //border(i-1) = border(i)でflag = 0
   // int viewlength = L/2;
   int64_t left = -1;
@@ -62,7 +64,7 @@ int main(){
 
   while(right-left>1){
     border = left + (right - left)/2;
-    if(abovetheborder(border, N, L, K, A))left = border;
+    if(abovetheborder(border))left = border;
     else right = border;
   }
   cout << left << endl;
