@@ -12,51 +12,55 @@ int main(){
   //N; 都市数
   //M; 道路の数
 
-  //vector<vector<int>> City(M, vector<int>(2)); //M行2列の２次元配列
-  vector<pair<int, int>> City(M); //M行2列の２次元配列　与えられた変数を保存するやつ。つまり道に対してそれがつなぐ都市。
-  vector<int> d(N+1,0); //それぞれの都市に存在する道の数を保存する変数 ex; d[0]= 都市1の道の数
+  //隣接行列はTLEだったから、隣接リストをやるよ。てか隣接リストそのものの出力を求められていたらしい。
+  vector<vector<int>> RinList(N+1);
 
-  for(int i=0; i<M; i++){//道
-    cin >> City.at(i).first;
-    cin >> City.at(i).second;
+  for(int i=1; i<=M; i++){
+    int A,B; //tmp
+    cin >> A >> B;
 
-    //ここで都市１のペアは都市ｘみたいなことを保存すれば？
-    //やっぱペアを使おう。
-    d.at(City.at(i).first)++;
-    d.at(City.at(i).second)++;
-
+    RinList.at(A).push_back(B);
+    RinList.at(B).push_back(A);
   }
-  //d が、idxと都市名が一致するようにした。（つまり、d[0]は使わない。)
 
-  //dが最初に求まったから、ｄに基づいてループを回したい。
-  //d[1]=都市1の道の数。
-  
+  for(int i=1; i<=N; i++){
+    sort(RinList.at(i).begin(), RinList.at(i).end());
 
-  for(int i=1; i<=N; i++){//都市
-    vector<int> paircity(d.at(i)); //i番目の都市の道の数分、ペアとなる都市があるから。
-
-    //ペアをみつけてpaircityに入れよう！
-    int pcidx=0; //paircity index
-    rep(j,M){
-      if(City.at(j).first == i){   //ここでは、i+1の都市だったとき、そのペアをみてるけれど、多分それは重い。
-        paircity.at(pcidx) = City.at(j).second;
-        pcidx++;
-      }
-      if(City.at(j).second == i){
-        paircity.at(pcidx) = City.at(j).first;
-        pcidx++;
-      }
-    }
-
-    sort(paircity.begin(), paircity.end()); //表示部分開始。まずaをソートする。
-    cout << d.at(i) << " ";
-    rep(j,d.at(i)){
-      cout << paircity.at(j) << " ";
+    cout << RinList.at(i).size() <<" ";
+    for(auto j:RinList.at(i)){
+      cout << j << " ";
     }
     cout << endl;
-
   }
 
+  //ACきたああああ
+
+  // vector<vector<int>> RinGyo(N+1, vector<int>(N+1,0)); //隣接行列 0で初期化。なお0を指定しなくても0で初期化される。0列目、0行目は全部0のまま変更されない。使用しない。
+  //
+  // for(int i=0; i<M; i++){
+  //   int A,B; //tmp
+  //   cin >> A >> B;
+  //
+  //   RinGyo.at(A).at(B) = 1;
+  //   RinGyo.at(B).at(A) = 1;
+  // }
+  //
+  // for(int i=1; i<=N; i++){
+  //   int flag =0;
+  //   int d=0;
+  //   for(int j=1; j<=N; j++){
+  //     if(RinGyo.at(i).at(j))d++;
+  //   }
+  //   cout << d << " ";
+  //
+  //   for(int j=1; j<=N; j++){
+  //     if(RinGyo.at(i).at(j)){
+  //       cout << j << " ";
+  //       flag = 1;
+  //     }
+  //   }
+  //   if(flag)cout << endl;
+  // }
 
   return 0;
 
