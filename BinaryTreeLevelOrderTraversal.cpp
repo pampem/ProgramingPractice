@@ -23,8 +23,8 @@ public:
 
       ret[depth].push_back(root -> val);
 
-      buildvector(root -> right, depth+1);
       buildvector(root -> left, depth+1);
+      buildvector(root -> right, depth+1);
     }
 
     vector<vector<int>> levelOrder(TreeNode* root) {
