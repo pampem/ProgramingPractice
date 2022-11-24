@@ -3,6 +3,7 @@
 
 #include<bits/stdc++.h>
 using namespace std;
+#define rep(i, n) for (int i = 0; i < (int)(n); i++)
 
 int main(){
   int N;
@@ -16,23 +17,25 @@ int main(){
 
   int Q;
   cin >> Q;
+  int indicater, xq, iq;
 
   for(int i=0; i<Q; i++){
-    int indicater;
     cin >> indicater;
 
     if(indicater == 1){
-      int xq;
       cin >> xq;
-      vector<int64_t> X(N, xq);
-      A = X;
+      // vector<int64_t> X(N, xq);
+      // A = X;
+
+      rep(j,A.size()){
+        A.at(j) = xq;
+      }
+
     }else if(indicater == 2){
-      int iq, xq;
       cin >> iq >> xq;
       A.at(iq-1) += xq;
 
     }else{// == 3
-      int iq;
       cin >> iq;
       cout << A.at(iq-1) << endl;
     }
