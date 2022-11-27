@@ -7,8 +7,36 @@ using namespace std;
 #define rep(i, n) for (int i = 0; i < (int)(n); i++)
 
 int main(){
+  int H,W;
+  cin >> H >> W;
 
-  
+  vector<string> S(H);
+  vector<string> T(H);
+  rep(i,H){
+    cin >> S[i];
+  }
+  rep(i,H){
+    cin >> T[i];
+  }
+
+  vector<string> St(W);
+  vector<string> Tt(W);
+  rep(i,H){
+    rep(j,W){
+      St[j].push_back(S[i][j]);
+      Tt[j].push_back(T[i][j]);
+    }
+  }
+
+    sort(St.begin(), St.end());
+    sort(Tt.begin(), Tt.end());
+
+  if(St==Tt){
+    cout << "Yes" << endl;
+    return 0;
+  }
+
+  cout << "No" << endl;
   return 0;
 }
 
