@@ -1,25 +1,34 @@
-#include <bits/stdc++.h>
-#include <iostream>
-#include <cassert>
-#include <vector>
+//AtCoder Today >> 1129
+//B - Everyone is Friends
 
-int main()
-{
-  // int型を要素とする可変長配列の変数を定義し、
-  // 初期状態の要素を設定
-  std::vector<int> v = {1, 99, 4};
+#include<bits/stdc++.h>
+using namespace std;
+#define rep(i, n) for (int i = 0; i < (int)(n); i++)
 
-  v[1] = 3;                    // 1番目の要素を参照し、書き換える
-  v.push_back(5);              // 末尾に値5を追加
-  v.insert(v.begin() + 1, 2);  // 1番目に値2を挿入
+int main(){
+  int N,M;
+  cin >> N >> M;
 
-  int* p = v.data();           // 内部表現のポインタを取得
-  std::size_t size = v.size(); // 要素数を取得
-  assert(p[0] == 1);
-  assert(size == 5u);
+  vector<vector<bool>> vec(N, vector<bool>(N,0));
 
-  // 各要素に対して操作を行う
-  for (int x : v) {
-    std::cout << x << std::endl;
+
+  for(int i = 0; i<M; i++){
+    int k;
+    cin >> k;
+    vector<int> x(k);
+    // for(int j=0; j<k; j++){
+    //   cin >> x[j];
+    //   cout << x[j] << endl;
+    // }
+    for(auto &xin:x){
+      cin >> xin;
+      xin--;
+    }
+    
+
+
   }
+
+
+  return 0;
 }
