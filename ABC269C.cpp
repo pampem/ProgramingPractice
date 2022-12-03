@@ -12,7 +12,7 @@ int main(){
   vector<int64_t> res={0};
 
   for(int d=0; d<60; d++){
-    if(x&(1ll<<d)){ //1bit shift. ll means long long.
+    if(x&(1ll<<d)){ //1をd bit left shift. ll means long long.
       int sz = res.size();
       for(int i=0; i<sz;i++){
         res.push_back(res[i]|(1ll<<d));
