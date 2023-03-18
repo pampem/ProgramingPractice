@@ -1,47 +1,49 @@
 //AtCoder Today >> 230311
-//C - Make Takahashi Happy
+//D - Tying Rope
 
 #include<bits/stdc++.h>
 using namespace std;
 #define rep(i, n) for (int i = 0; i < (int)(n); i++)
 
-void dfs(int v, vector<vector<int>> &G, vector<bool> &seen, bool &jisuuhantei, vector<int> &deg){
-  seen[v] = true;
-  for(auto v2:G[v]){
-    if(deg[v2] != 2) jisuuhantei = false;
-    if(seen[v2])continue;
-    dfs(v2,G,seen,jisuuhantei,deg);
-  }
-  return;
-}
-
 int main(){
   int n,m;
   cin >> n >> m;
-  vector<vector<int>> graph(n, vector<int> ());
-  vector<bool> seen(n,false);
-  vector<int> deg(n); //頂点の次数を見る変数
+  
+  vector<vector<int>> graph(n,vector<int>());
+  vector<int> deg(n);
 
   rep(i,m){
-    int a, c;
-    char b, d;
+    int a,c;
+    char b,d;
     cin >> a >> b >> c >> d;
-    a--;c--;
+    a--; c--;
     graph[a].push_back(c);
     graph[c].push_back(a);
     deg[a]++; deg[c]++;
   }
 
-  int cicle = 0, line = 0;
+  int x=0, y=0;
+  vector<bool> used(n);
   rep(i,n){
-    bool jisuuhantei = true;
-    if(seen[i])continue;
-    dfs(i,graph,seen,jisuuhantei,deg);
-    if(jisuuhantei) cicle++;
-    else line++;
+    if(!used[i]){
+      queue<int> que;
+      used[i] = true;
+      que.push(i);
+      bool f=true;
+      while(!que.empty()){
+        int q = que.front(); que.pop();
+        if(deg[q] != 2) f=false;
+        for(int v:graph[q]){
+          if(!used[v]){
+            que.push(v);
+            used[v] = true;
+          }
+        }
+      }
+      if(f) x++;
+      else y++;
+    }
   }
-
-  cout << cicle << ' ' << line << endl;
-
+  cout << x << ' ' << y << endl;
   return 0;
 }
