@@ -10,16 +10,16 @@ int main(){
   cin >> s;
 
   int bindex=0;
-  int rindex1, rindex2;
+  int rindex1=0, rindex2;
   int kindex;
 
   rep(i,8){
     if(s[i]=='B'){
       if(!bindex){
-        bindex = i;
+        bindex = i+1;
         for(int j=i+1; j<8; j++){
           if(s[j]=='B'){
-            if((bindex % 2)==(j % 2)){
+            if((bindex % 2)==((j+1) % 2)){
               cout << "No" << endl;
               return 0;
             }
@@ -30,18 +30,18 @@ int main(){
     }
 
     if(s[i]=='R'){
-      if(rindex1){
-        rindex1 = i;
+      if(!rindex1){
+        rindex1 = i+1;
         for(int j=i; j<8; j++){
           if(s[j]=='R'){
-            rindex2 = j;
+            rindex2 = j+1;
           }
         }
       }
     }
 
     if(s[i]=='K'){
-      kindex = i;
+      kindex = i+1;
     }
 
   }
